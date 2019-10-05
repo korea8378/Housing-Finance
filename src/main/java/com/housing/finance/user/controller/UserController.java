@@ -1,5 +1,6 @@
 package com.housing.finance.user.controller;
 
+import com.housing.finance.exception.RequestNullFieldException;
 import com.housing.finance.user.dto.ReqSignUpDto;
 import com.housing.finance.user.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class UserController {
     public ResponseEntity<Void> signUp(@RequestBody @Valid ReqSignUpDto reqSignUpDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            throw new NullPointerException();
+            throw new RequestNullFieldException();
         }
 
         userService.signUp(reqSignUpDto);

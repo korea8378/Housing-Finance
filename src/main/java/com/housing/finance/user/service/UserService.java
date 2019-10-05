@@ -1,5 +1,6 @@
 package com.housing.finance.user.service;
 
+import com.housing.finance.exception.user.ExistUserIdException;
 import com.housing.finance.user.domain.User;
 import com.housing.finance.user.domain.UserRepository;
 import com.housing.finance.user.dto.ReqSignUpDto;
@@ -17,7 +18,7 @@ public class UserService {
 
     public void signUp(ReqSignUpDto reqSignUpDto) {
         if (isUserId(reqSignUpDto.getUserId())) {
-            throw new NullPointerException();
+            throw new ExistUserIdException();
         }
 
         String hashPw = encodingPassword(reqSignUpDto.getPassword());
