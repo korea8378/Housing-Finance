@@ -5,8 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ResSignInDto {
+public class ResUserDto {
 
-    private String userId;
     private String token;
 }

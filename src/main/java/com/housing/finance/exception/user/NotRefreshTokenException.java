@@ -4,21 +4,21 @@ import com.housing.finance.exception.BaseException;
 import com.housing.finance.exception.ErrorModel;
 import org.springframework.http.HttpStatus;
 
-public class NotFoundUserException extends BaseException {
+public class NotRefreshTokenException extends BaseException {
 
-    public NotFoundUserException() {
+    public NotRefreshTokenException() {
         this(HttpStatus.BAD_REQUEST);
     }
 
-    public NotFoundUserException(HttpStatus httpStatus) {
-        this(4002, httpStatus);
+    public NotRefreshTokenException(HttpStatus httpStatus) {
+        this(4004, httpStatus);
     }
 
-    public NotFoundUserException(int code, HttpStatus httpStatus) {
+    public NotRefreshTokenException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
                 .code(code)
                 .httpStatus(httpStatus)
-                .massage("check userId or password")
+                .massage("check Authorization Header")
                 .build());
     }
 }

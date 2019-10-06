@@ -2,11 +2,11 @@ package com.housing.finance.user.service;
 
 import com.housing.finance.exception.user.ExistUserIdException;
 import com.housing.finance.exception.user.NotFoundUserException;
+import com.housing.finance.exception.user.NotRefreshTokenException;
 import com.housing.finance.user.domain.User;
 import com.housing.finance.user.domain.UserRepository;
 import com.housing.finance.user.dto.ReqUserDto;
-import com.housing.finance.user.dto.ResSignInDto;
-import com.housing.finance.user.dto.ResSignUpDto;
+import com.housing.finance.user.dto.ResUserDto;
 import com.housing.finance.common.JWTManager;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +21,16 @@ public class UserService {
         this.jwtManager = jwtManager;
     }
 
-    public ResSignInDto signIn(ReqUserDto reqUserDto) {
+    public ResUserDto signIn(ReqUserDto reqUserDto) {
         User user = userRepository.findByUserIdAndPassword(reqUserDto.getUserId(), reqUserDto.getPassword())
                 .orElseThrow(NotFoundUserException::new);
 
         String token = jwtManager.createJWT(user.getUserId());
 
-        return new ResSignInDto(user.getUserId(), token);
+        return new ResUserDto(token);
     }
 
-    public ResSignUpDto signUp(ReqUserDto reqUserDto) {
+    public ResUserDto signUp(ReqUserDto reqUserDto) {
         if (isUserId(reqUserDto.getUserId())) {
             throw new ExistUserIdException();
         }
@@ -41,10 +41,22 @@ public class UserService {
 
         String token = jwtManager.createJWT(user.getUserId());
 
-        return new ResSignUpDto(token);
+        return new ResUserDto(token);
     }
 
     private boolean isUserId(String userId) {
         return userRepository.existsByUserId(userId);
+    }
+
+    public ResUserDto refreshToken(String requestToken) {
+        if (jwtManager.isNotRefresh(requestToken)) {
+            throw new NotRefreshTokenException();
+        }
+
+        String userId = jwtManager.getPayLoadUserId(requestToken);
+
+        String refreshToken = jwtManager.createJWT(userId);
+
+        return new ResUserDto(refreshToken);
     }
 }

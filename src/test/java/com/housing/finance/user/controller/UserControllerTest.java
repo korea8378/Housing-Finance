@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -49,6 +50,27 @@ public class UserControllerTest {
                 .content(objectMapper.writeValueAsString(ReqUserDto)))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testRefreshToken() throws Exception {
+
+        this.mockMvc.perform(get("/user/token")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .header("Authorization", "Bearer Token")
+                .param("userId", "test"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testNoneAuthorizationHeaderRefreshToken() throws Exception {
+
+        this.mockMvc.perform(get("/user/token")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .param("userId", "test"))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 
     @Test

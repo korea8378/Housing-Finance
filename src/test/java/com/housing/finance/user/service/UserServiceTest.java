@@ -3,6 +3,7 @@ package com.housing.finance.user.service;
 import com.housing.finance.common.JWTManager;
 import com.housing.finance.exception.user.ExistUserIdException;
 import com.housing.finance.exception.user.NotFoundUserException;
+import com.housing.finance.exception.user.NotRefreshTokenException;
 import com.housing.finance.user.domain.User;
 import com.housing.finance.user.domain.UserRepository;
 import com.housing.finance.user.dto.ReqUserDto;
@@ -26,14 +27,14 @@ public class UserServiceTest {
 
     private UserRepository userRepository;
 
-    private JWTManager jwtService;
+    private JWTManager jwtManager;
 
     @Before
     public void mockUp() {
         userRepository = mock(UserRepository.class);
-        jwtService = mock(JWTManager.class);
+        jwtManager = mock(JWTManager.class);
 
-        userService = new UserService(userRepository, jwtService);
+        userService = new UserService(userRepository, jwtManager);
     }
 
     @Test
@@ -57,4 +58,16 @@ public class UserServiceTest {
 
         userService.signIn(reqSignUpDto);
     }
+
+    @Test
+    public void testRefreshHeaderIsNotSameAuthorizationHeader() {
+        when(jwtManager.isNotRefresh(any())).thenReturn(true);
+
+        expectedException.expect(NotRefreshTokenException.class);
+
+        String authorizationHeader = "is Not Same Header";
+
+        userService.refreshToken(authorizationHeader);
+    }
+
 }
