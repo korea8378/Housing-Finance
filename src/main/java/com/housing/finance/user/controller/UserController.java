@@ -2,6 +2,7 @@ package com.housing.finance.user.controller;
 
 import com.housing.finance.exception.RequestNullFieldException;
 import com.housing.finance.user.dto.ReqSignUpDto;
+import com.housing.finance.user.dto.ResSignUpDto;
 import com.housing.finance.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +23,12 @@ public class UserController {
     }
 
     @PostMapping("/user/sign-up")
-    public ResponseEntity<Void> signUp(@RequestBody @Valid ReqSignUpDto reqSignUpDto, BindingResult bindingResult) {
+    public ResponseEntity<ResSignUpDto> signUp(@RequestBody @Valid ReqSignUpDto reqSignUpDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new RequestNullFieldException();
         }
 
-        userService.signUp(reqSignUpDto);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.OK).body(userService.signUp(reqSignUpDto));
     }
 }
