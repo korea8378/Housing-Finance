@@ -1,12 +1,13 @@
 package com.housing.finance.user.service;
 
 import com.housing.finance.exception.user.ExistUserIdException;
+import com.housing.finance.exception.user.NotFoundUserException;
+import com.housing.finance.exception.user.NotRefreshTokenException;
 import com.housing.finance.user.domain.User;
 import com.housing.finance.user.domain.UserRepository;
-import com.housing.finance.user.dto.ReqSignUpDto;
-import com.housing.finance.user.dto.ResSignUpDto;
+import com.housing.finance.user.dto.ReqUserDto;
+import com.housing.finance.user.dto.ResUserDto;
 import com.housing.finance.common.JWTManager;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,30 +21,42 @@ public class UserService {
         this.jwtManager = jwtManager;
     }
 
-    public ResSignUpDto signUp(ReqSignUpDto reqSignUpDto) {
-        if (isUserId(reqSignUpDto.getUserId())) {
+    public ResUserDto signIn(ReqUserDto reqUserDto) {
+        User user = userRepository.findByUserIdAndPassword(reqUserDto.getUserId(), reqUserDto.getPassword())
+                .orElseThrow(NotFoundUserException::new);
+
+        String token = jwtManager.createJWT(user.getUserId());
+
+        return new ResUserDto(token);
+    }
+
+    public ResUserDto signUp(ReqUserDto reqUserDto) {
+        if (isUserId(reqUserDto.getUserId())) {
             throw new ExistUserIdException();
         }
 
-        User user = createUser(reqSignUpDto);
+        User user = new User(reqUserDto.getUserId(), reqUserDto.getPassword());
 
         user = userRepository.save(user);
 
         String token = jwtManager.createJWT(user.getUserId());
 
-        return new ResSignUpDto(token);
+        return new ResUserDto(token);
     }
 
     private boolean isUserId(String userId) {
         return userRepository.existsByUserId(userId);
     }
 
-    private User createUser(ReqSignUpDto reqSignUpDto) {
-        String hashPw = encodingPassword(reqSignUpDto.getPassword());
-        return new User(reqSignUpDto.getUserId(), hashPw);
-    }
+    public ResUserDto refreshToken(String requestToken) {
+        if (jwtManager.isNotRefresh(requestToken)) {
+            throw new NotRefreshTokenException();
+        }
 
-    private String encodingPassword(String reqPw) {
-        return BCrypt.hashpw(reqPw, BCrypt.gensalt());
+        String userId = jwtManager.getPayLoadUserId(requestToken);
+
+        String refreshToken = jwtManager.createJWT(userId);
+
+        return new ResUserDto(refreshToken);
     }
 }

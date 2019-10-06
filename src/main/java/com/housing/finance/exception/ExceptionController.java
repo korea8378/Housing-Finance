@@ -24,8 +24,8 @@ public class ExceptionController {
                 exception.getErrorModel().getMassage());
 
         switch (exception.getErrorModel().getHttpStatus()) {
-            case FORBIDDEN:
-                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+            case UNAUTHORIZED:
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(toResExceptionDto(exception.getErrorModel()));
             case BAD_REQUEST:
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
