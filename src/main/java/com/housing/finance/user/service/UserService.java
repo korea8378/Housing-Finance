@@ -1,12 +1,13 @@
 package com.housing.finance.user.service;
 
 import com.housing.finance.exception.user.ExistUserIdException;
+import com.housing.finance.exception.user.NotFoundUserException;
 import com.housing.finance.user.domain.User;
 import com.housing.finance.user.domain.UserRepository;
-import com.housing.finance.user.dto.ReqSignUpDto;
+import com.housing.finance.user.dto.ReqUserDto;
+import com.housing.finance.user.dto.ResSignInDto;
 import com.housing.finance.user.dto.ResSignUpDto;
 import com.housing.finance.common.JWTManager;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,12 +21,21 @@ public class UserService {
         this.jwtManager = jwtManager;
     }
 
-    public ResSignUpDto signUp(ReqSignUpDto reqSignUpDto) {
-        if (isUserId(reqSignUpDto.getUserId())) {
+    public ResSignInDto signIn(ReqUserDto reqUserDto) {
+        User user = userRepository.findByUserIdAndPassword(reqUserDto.getUserId(), reqUserDto.getPassword())
+                .orElseThrow(NotFoundUserException::new);
+
+        String token = jwtManager.createJWT(user.getUserId());
+
+        return new ResSignInDto(user.getUserId(), token);
+    }
+
+    public ResSignUpDto signUp(ReqUserDto reqUserDto) {
+        if (isUserId(reqUserDto.getUserId())) {
             throw new ExistUserIdException();
         }
 
-        User user = createUser(reqSignUpDto);
+        User user = new User(reqUserDto.getUserId(), reqUserDto.getPassword());
 
         user = userRepository.save(user);
 
@@ -36,14 +46,5 @@ public class UserService {
 
     private boolean isUserId(String userId) {
         return userRepository.existsByUserId(userId);
-    }
-
-    private User createUser(ReqSignUpDto reqSignUpDto) {
-        String hashPw = encodingPassword(reqSignUpDto.getPassword());
-        return new User(reqSignUpDto.getUserId(), hashPw);
-    }
-
-    private String encodingPassword(String reqPw) {
-        return BCrypt.hashpw(reqPw, BCrypt.gensalt());
     }
 }

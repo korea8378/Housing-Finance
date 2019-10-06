@@ -2,12 +2,16 @@ package com.housing.finance.user.service;
 
 import com.housing.finance.common.JWTManager;
 import com.housing.finance.exception.user.ExistUserIdException;
+import com.housing.finance.exception.user.NotFoundUserException;
+import com.housing.finance.user.domain.User;
 import com.housing.finance.user.domain.UserRepository;
-import com.housing.finance.user.dto.ReqSignUpDto;
+import com.housing.finance.user.dto.ReqUserDto;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -38,8 +42,19 @@ public class UserServiceTest {
 
         expectedException.expect(ExistUserIdException.class);
 
-        ReqSignUpDto reqSignUpDto = new ReqSignUpDto("test", "test");
+        ReqUserDto reqSignUpDto = new ReqUserDto("test", "test");
 
         userService.signUp(reqSignUpDto);
+    }
+
+    @Test
+    public void testFailSignIn() {
+        when(userRepository.findByUserIdAndPassword(any(), any())).thenReturn(Optional.empty());
+
+        expectedException.expect(NotFoundUserException.class);
+
+        ReqUserDto reqSignUpDto = new ReqUserDto("test", "test");
+
+        userService.signIn(reqSignUpDto);
     }
 }

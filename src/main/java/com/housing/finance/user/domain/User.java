@@ -2,6 +2,7 @@ package com.housing.finance.user.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.persistence.*;
 
@@ -22,6 +23,6 @@ public class User {
 
     public User(String userId, String password) {
         this.userId = userId;
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 }

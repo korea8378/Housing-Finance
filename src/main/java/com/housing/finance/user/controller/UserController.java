@@ -1,7 +1,8 @@
 package com.housing.finance.user.controller;
 
 import com.housing.finance.exception.RequestNullFieldException;
-import com.housing.finance.user.dto.ReqSignUpDto;
+import com.housing.finance.user.dto.ReqUserDto;
+import com.housing.finance.user.dto.ResSignInDto;
 import com.housing.finance.user.dto.ResSignUpDto;
 import com.housing.finance.user.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -23,12 +24,22 @@ public class UserController {
     }
 
     @PostMapping("/user/sign-up")
-    public ResponseEntity<ResSignUpDto> signUp(@RequestBody @Valid ReqSignUpDto reqSignUpDto, BindingResult bindingResult) {
+    public ResponseEntity<ResSignUpDto> signUp(@RequestBody @Valid ReqUserDto reqUserDto, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             throw new RequestNullFieldException();
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(userService.signUp(reqSignUpDto));
+        return ResponseEntity.status(HttpStatus.OK).body(userService.signUp(reqUserDto));
+    }
+
+    @PostMapping("/user/sign-in")
+    public ResponseEntity<ResSignInDto> signIn(@RequestBody @Valid ReqUserDto reqUserDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new RequestNullFieldException();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(userService.signIn(reqUserDto));
     }
 }
