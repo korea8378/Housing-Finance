@@ -15,6 +15,7 @@ import java.util.Date;
 public class JWTManager {
 
     private final static String REFRESH_KEYWORD = "Bearer Token";
+    private final static String KEYWORD = "Bearer";
 
     private String key;
 
@@ -50,13 +51,13 @@ public class JWTManager {
     }
 
     public String getPayLoadUserId(String token) {
-        String temToken = subStringRefreshString(token);
+        String tempToken = subStringRefreshString(token);
 
         String userId;
         try {
             userId = Jwts.parser()
                     .setSigningKey(generateKey(key))
-                    .parseClaimsJws(temToken)
+                    .parseClaimsJws(tempToken)
                     .getBody()
                     .get("userId")
                     .toString();
@@ -69,4 +70,21 @@ public class JWTManager {
     private String subStringRefreshString(String token) {
         return token.substring(REFRESH_KEYWORD.length());
     }
+
+    public void authenticate(String token) {
+        String tempToken = subStringKeywordString(token);
+
+        try {
+            Jwts.parser()
+                    .setSigningKey(generateKey(key))
+                    .parseClaimsJws(tempToken);
+        } catch (JwtException e) {
+            throw new FailAuthenticationException();
+        }
+    }
+
+    private String subStringKeywordString(String token) {
+        return token.substring(KEYWORD.length());
+    }
+
 }
