@@ -1,8 +1,10 @@
 package com.housing.finance.authentication;
 
 import com.housing.finance.common.JWTManager;
+import com.housing.finance.exception.authentication.FailAuthenticationException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -19,7 +21,15 @@ public class AuthenticationAspect {
         this.jwtManager = jwtManager;
     }
 
-    @Before(value = "execution(public * com.housing.finance.bank.controller.HousingFinanceController.*(..))")
+    @Pointcut("execution(public * com.housing.finance.bank.controller.BankController.*(..))")
+    public void bankController() {
+    }
+
+    @Pointcut("execution(public * com.housing.finance.housingfinance.controller.HousingFinanceController.*(..))")
+    public void housingFinanceController() {
+    }
+
+    @Before(value = "bankController() || housingFinanceController()")
     public void checkJWT() {
         HttpServletRequest request =
                 ((ServletRequestAttributes) RequestContextHolder
@@ -28,6 +38,14 @@ public class AuthenticationAspect {
 
         String token = request.getHeader("Authorization");
 
+        if (isEmptyToken(token)) {
+            throw new FailAuthenticationException();
+        }
+
         jwtManager.authenticate(token);
+    }
+
+    private boolean isEmptyToken(String token) {
+        return token == null;
     }
 }
