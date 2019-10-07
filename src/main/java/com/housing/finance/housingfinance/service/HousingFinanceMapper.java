@@ -2,6 +2,8 @@ package com.housing.finance.housingfinance.service;
 
 import com.housing.finance.exception.housingfinance.UnsupportedFormCSVException;
 import com.housing.finance.housingfinance.domain.HousingFinance;
+import com.housing.finance.housingfinance.dto.ResTotalAmountDto;
+import com.housing.finance.housingfinance.dto.ResTotalHousingFinanceDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -63,5 +65,12 @@ public class HousingFinanceMapper {
             throw new UnsupportedFormCSVException();
         }
         return result;
+    }
+
+    public ResTotalHousingFinanceDto toResTotalHousingFinanceDto(List<ResTotalAmountDto> resTotalAmountDtoList) {
+        return ResTotalHousingFinanceDto.builder()
+                .name("주택금융 공급현황")
+                .amountList(resTotalAmountDtoList)
+                .build();
     }
 }
