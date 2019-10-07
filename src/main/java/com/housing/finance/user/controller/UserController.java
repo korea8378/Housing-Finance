@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/user/token")
-    public ResponseEntity<ResUserDto> refreshToken(@RequestHeader("Authorization") @NotNull String authorization) {
+    public ResponseEntity<ResUserDto> refreshToken(@RequestHeader("Authorization") String authorization) {
 
         return ResponseEntity.status(HttpStatus.OK).body(userService.refreshToken(authorization));
     }

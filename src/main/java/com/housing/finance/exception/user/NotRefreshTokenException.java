@@ -11,7 +11,7 @@ public class NotRefreshTokenException extends BaseException {
     }
 
     public NotRefreshTokenException(HttpStatus httpStatus) {
-        this(4004, httpStatus);
+        this(4003, httpStatus);
     }
 
     public NotRefreshTokenException(int code, HttpStatus httpStatus) {
