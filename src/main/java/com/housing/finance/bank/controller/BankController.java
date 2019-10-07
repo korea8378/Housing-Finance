@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class BankController {
 
-    private final BankService housingFinanceService;
+    private final BankService bankService;
 
-    public BankController(BankService housingFinanceService) {
-        this.housingFinanceService = housingFinanceService;
+    public BankController(BankService bankService) {
+        this.bankService = bankService;
     }
 
     @GetMapping("/banks")
     public ResponseEntity<ResBanksDto> getBanks() {
-        return ResponseEntity.status(HttpStatus.OK).body(housingFinanceService.getBanks());
+        return ResponseEntity.status(HttpStatus.OK).body(bankService.getBanks());
     }
 }
