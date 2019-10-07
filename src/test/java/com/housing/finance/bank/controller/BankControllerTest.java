@@ -1,7 +1,7 @@
-package com.housing.finance.housingfinance.controller;
+package com.housing.finance.bank.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.housing.finance.housingfinance.service.HousingFinanceService;
+import com.housing.finance.bank.service.BankService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +17,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(HousingFinanceController.class)
-public class HousingFinanceControllerTest {
+@WebMvcTest(BankController.class)
+public class BankControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -26,7 +26,7 @@ public class HousingFinanceControllerTest {
     ObjectMapper objectMapper;
 
     @MockBean
-    private HousingFinanceService housingFinanceService;
+    private BankService bankService;
 
     @Test
     public void testGetBanks() throws Exception {

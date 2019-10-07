@@ -1,4 +1,4 @@
-package com.housing.finance.housingfinance.domain;
+package com.housing.finance.bank.domain;
 
 import lombok.Getter;
 

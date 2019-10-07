@@ -1,4 +1,4 @@
-package com.housing.finance.housingfinance.dto;
+package com.housing.finance.bank.dto;
 
 import lombok.Builder;
 import lombok.Getter;
