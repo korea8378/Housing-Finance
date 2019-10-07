@@ -9,7 +9,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class HousingFinanceMapperTest {
 
-
     @Test
     public void testMappingCSVToHousingFinance() {
         HousingFinanceMapper housingFinanceMapper = new HousingFinanceMapper();

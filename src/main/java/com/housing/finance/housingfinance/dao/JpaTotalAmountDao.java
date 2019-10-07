@@ -4,14 +4,17 @@ import com.housing.finance.housingfinance.dto.ResTotalAmountDto;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
 public class JpaTotalAmountDao implements TotalAmountDao {
-    @PersistenceContext
-    private EntityManager em;
+
+    private final EntityManager em;
+
+    public JpaTotalAmountDao(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public List<ResTotalAmountDto> selectGroupByYear() {

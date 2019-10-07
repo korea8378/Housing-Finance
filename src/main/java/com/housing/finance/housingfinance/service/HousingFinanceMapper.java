@@ -1,5 +1,6 @@
 package com.housing.finance.housingfinance.service;
 
+import com.housing.finance.exception.housingfinance.UnsupportedFormCSVException;
 import com.housing.finance.housingfinance.domain.HousingFinance;
 import org.springframework.stereotype.Component;
 
@@ -55,6 +56,12 @@ public class HousingFinanceMapper {
     }
 
     private Long convertingToLong(String text) {
-        return Long.parseLong(text.replaceAll(COMMA, EMPTY));
+        Long result;
+        try {
+            result = Long.parseLong(text.replaceAll(COMMA, EMPTY));
+        } catch (NumberFormatException e) {
+            throw new UnsupportedFormCSVException();
+        }
+        return result;
     }
 }
