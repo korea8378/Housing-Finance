@@ -1,15 +1,14 @@
-package com.housing.finance.housingfinance.service;
+package com.housing.finance.bank.service;
 
-import com.housing.finance.housingfinance.domain.Bank;
-import com.housing.finance.housingfinance.dto.ResBankDto;
-import com.housing.finance.housingfinance.dto.ResBanksDto;
+import com.housing.finance.bank.domain.Bank;
+import com.housing.finance.bank.dto.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class HousingFinanceMapper {
+public class BankMapper {
 
     public ResBanksDto toResBanksDto(List<Bank> banks) {
         return new ResBanksDto(banks.stream()

@@ -16,5 +16,7 @@ public class HousingFinance {
 
     private String bankName;
 
+    private Long bankId;
+
     private Long amount;
 }

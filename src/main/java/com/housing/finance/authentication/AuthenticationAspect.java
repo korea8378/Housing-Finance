@@ -19,7 +19,7 @@ public class AuthenticationAspect {
         this.jwtManager = jwtManager;
     }
 
-    @Before(value = "execution(public * com.housing.finance.housingfinance.controller.HousingFinanceController.*(..))")
+    @Before(value = "execution(public * com.housing.finance.bank.controller.HousingFinanceController.*(..))")
     public void checkJWT() {
         HttpServletRequest request =
                 ((ServletRequestAttributes) RequestContextHolder
