@@ -11,16 +11,17 @@ import java.util.List;
 public class HousingFinanceTotalService {
 
     private final JpaTotalAmountDao jpaTotalViewDao;
+    private final HousingFinanceMapper housingFinanceMapper;
 
-    public HousingFinanceTotalService(JpaTotalAmountDao jpaTotalViewDao) {
+    public HousingFinanceTotalService(JpaTotalAmountDao jpaTotalViewDao,
+                                      HousingFinanceMapper housingFinanceMapper) {
         this.jpaTotalViewDao = jpaTotalViewDao;
+        this.housingFinanceMapper = housingFinanceMapper;
     }
 
     public ResTotalHousingFinanceDto getTotalAmountByYear() {
         List<ResTotalAmountDto> resTotalAmountDtoList = jpaTotalViewDao.selectGroupByYear();
-       return ResTotalHousingFinanceDto.builder()
-               .name("주택금융 공급현황")
-               .amountList(resTotalAmountDtoList)
-               .build();
+
+        return housingFinanceMapper.toResTotalHousingFinanceDto(resTotalAmountDtoList);
     }
 }

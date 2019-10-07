@@ -50,4 +50,12 @@ public class HousingFinanceControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void testGetMaximumOfAllBank() throws Exception {
+        this.mockMvc.perform(get("/housing-finance/maximum")
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
 }
