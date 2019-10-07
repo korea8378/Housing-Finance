@@ -1,5 +1,6 @@
 package com.housing.finance.housingfinance.controller;
 
+import com.housing.finance.housingfinance.dto.ResTotalHousingFinanceDto;
 import com.housing.finance.housingfinance.service.HousingFinanceVO;
 import com.housing.finance.housingfinance.service.HousingFinanceService;
 import org.springframework.http.HttpStatus;
@@ -20,5 +21,10 @@ public class HousingFinanceController {
     public ResponseEntity<Void> uploadHousingFinanceCSV(@RequestParam MultipartFile file) {
         housingFinanceService.upload(HousingFinanceVO.class, file);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping(value = "/housing-finance/total")
+    public ResponseEntity<ResTotalHousingFinanceDto> getHousingFinanceTotalAmount() {
+        return ResponseEntity.status(HttpStatus.OK).body(housingFinanceService.getTotalAmountByYear());
     }
 }
