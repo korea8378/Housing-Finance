@@ -1,0 +1,9 @@
+insert into bank (NAME, CODE) values ('주택도시기금', 'bnk1029');
+insert into bank (NAME, CODE) values ('국민은행', 'bnk7995');
+insert into bank (NAME, CODE) values ('우리은행', 'bnk1568');
+insert into bank (NAME, CODE) values ('신한은행', 'bnk2732');
+insert into bank (NAME, CODE) values ('한국시티은행', 'bnk2099');
+insert into bank (NAME, CODE) values ('하나은행', 'bnk1610');
+insert into bank (NAME, CODE) values ('농협은행/수협은행', 'bnk4982');
+insert into bank (NAME, CODE) values ('외환은행', 'bnk6701');
+insert into bank (NAME, CODE) values ('기타은행', 'bnk1800');

@@ -36,11 +36,19 @@ public class JWTManagerTest {
     }
 
     @Test
-    public void failGetPayLoadUserId() {
+    public void testFailGetPayLoadUserId() {
         expectedException.expect(FailAuthenticationException.class);
 
         JWTManager jwtManager = new JWTManager("안녕하세요 test용 키입니다.");
         jwtManager.getPayLoadUserId("Fail Bearer Token");
+    }
+
+    @Test
+    public void testFailAuthenticate() {
+        expectedException.expect(FailAuthenticationException.class);
+        JWTManager jwtManager = new JWTManager("안녕하세요 test용 키입니다.");
+
+        jwtManager.authenticate("fail token");
     }
 
 }

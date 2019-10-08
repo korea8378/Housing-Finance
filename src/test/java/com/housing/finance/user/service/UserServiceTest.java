@@ -4,7 +4,6 @@ import com.housing.finance.common.JWTManager;
 import com.housing.finance.exception.user.ExistUserIdException;
 import com.housing.finance.exception.user.NotFoundUserException;
 import com.housing.finance.exception.user.NotRefreshTokenException;
-import com.housing.finance.user.domain.User;
 import com.housing.finance.user.domain.UserRepository;
 import com.housing.finance.user.dto.ReqUserDto;
 import org.junit.Before;
