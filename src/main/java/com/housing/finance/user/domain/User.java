@@ -7,7 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user")
+@Table(name = "exception")
 @Getter
 @NoArgsConstructor
 public class User {
