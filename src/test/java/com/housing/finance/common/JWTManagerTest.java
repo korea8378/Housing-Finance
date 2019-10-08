@@ -1,14 +1,12 @@
 package com.housing.finance.common;
 
-import com.housing.finance.exception.authentication.FailAuthenticationException;
-import com.housing.finance.exception.user.ExistUserIdException;
+import com.housing.finance.authentication.exception.FailAuthenticationException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 public class JWTManagerTest {
 

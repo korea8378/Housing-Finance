@@ -1,6 +1,6 @@
 package com.housing.finance.common;
 
-import com.housing.finance.exception.authentication.FailAuthenticationException;
+import com.housing.finance.authentication.exception.FailAuthenticationException;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;

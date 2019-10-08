@@ -1,7 +1,7 @@
 package com.housing.finance.authentication;
 
 import com.housing.finance.common.JWTManager;
-import com.housing.finance.exception.authentication.FailAuthenticationException;
+import com.housing.finance.authentication.exception.FailAuthenticationException;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,11 +21,11 @@ public class AuthenticationAspect {
         this.jwtManager = jwtManager;
     }
 
-    @Pointcut("execution(public * com.housing.finance.bank.controller.BankController.*(..))")
+    @Pointcut("execution(public * com.housing.finance.bank.ui.BankController.*(..))")
     public void bankController() {
     }
 
-    @Pointcut("execution(public * com.housing.finance.housingfinance.controller.HousingFinanceController.*(..))")
+    @Pointcut("execution(public * com.housing.finance.housingfinance.ui.HousingFinanceController.*(..))")
     public void housingFinanceController() {
     }
 
