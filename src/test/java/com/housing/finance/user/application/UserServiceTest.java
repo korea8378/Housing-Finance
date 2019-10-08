@@ -1,8 +1,10 @@
 package com.housing.finance.user.application;
 
 import com.housing.finance.common.JWTManager;
+import com.housing.finance.user.domain.User;
 import com.housing.finance.user.dto.ReqUserDto;
 import com.housing.finance.user.exception.ExistUserIdException;
+import com.housing.finance.user.exception.IsNotEqualToPasswordException;
 import com.housing.finance.user.exception.NotFoundUserException;
 import com.housing.finance.user.exception.NotRefreshTokenException;
 import com.housing.finance.user.domain.UserRepository;
@@ -48,12 +50,23 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testFailSignIn() {
+    public void testSignInNoFoundUserByID() {
         when(userRepository.findByUserIdAndPassword(any(), any())).thenReturn(Optional.empty());
 
         expectedException.expect(NotFoundUserException.class);
 
         ReqUserDto reqSignUpDto = new ReqUserDto("test", "test");
+
+        userService.signIn(reqSignUpDto);
+    }
+
+    @Test
+    public void testSignInIsNotEqualToPassword() {
+        when(userRepository.findByUserIdAndPassword(any(), any())).thenReturn(Optional.of(new User()));
+
+        expectedException.expect(IsNotEqualToPasswordException.class);
+
+        ReqUserDto reqSignUpDto = new ReqUserDto("test", "test132");
 
         userService.signIn(reqSignUpDto);
     }

@@ -4,21 +4,21 @@ import com.housing.finance.exception.BaseException;
 import com.housing.finance.exception.ErrorModel;
 import org.springframework.http.HttpStatus;
 
-public class NotFoundUserException extends BaseException {
+public class IsNotEqualToPasswordException extends BaseException {
 
-    public NotFoundUserException() {
+    public IsNotEqualToPasswordException() {
         this(HttpStatus.BAD_REQUEST);
     }
 
-    public NotFoundUserException(HttpStatus httpStatus) {
-        this(4002, httpStatus);
+    public IsNotEqualToPasswordException(HttpStatus httpStatus) {
+        this(4005, httpStatus);
     }
 
-    public NotFoundUserException(int code, HttpStatus httpStatus) {
+    public IsNotEqualToPasswordException(int code, HttpStatus httpStatus) {
         super(ErrorModel.builder()
                 .code(code)
                 .httpStatus(httpStatus)
-                .massage("check userId")
+                .massage("check password")
                 .build());
     }
 }
