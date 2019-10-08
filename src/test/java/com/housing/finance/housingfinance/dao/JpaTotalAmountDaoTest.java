@@ -28,13 +28,14 @@ public class JpaTotalAmountDaoTest {
     @Autowired
     private EntityManager entityManager;
 
+
     @Test
-    public void testTotalAmountJpql() {
+    public void testSelectGroupByYear() {
         jpaTotalAmountDao = new JpaTotalAmountDao(entityManager);
-        HousingFinance housingFinanceOne = new HousingFinance(2005L, 1L,"주택도시기금", 1019L);
-        HousingFinance housingFinanceTwo = new HousingFinance(2005L, 2L,"주택도시기금", 1022L);
-        HousingFinance housingFinanceThree = new HousingFinance(2006L, 1L,"국민은행", 846L);
-        HousingFinance housingFinanceFour = new HousingFinance(2006L, 2L,"국민은행", 222L);
+        HousingFinance housingFinanceOne = new HousingFinance(2005L, 1L, "주택도시기금", 1019L);
+        HousingFinance housingFinanceTwo = new HousingFinance(2005L, 2L, "주택도시기금", 1022L);
+        HousingFinance housingFinanceThree = new HousingFinance(2006L, 1L, "국민은행", 846L);
+        HousingFinance housingFinanceFour = new HousingFinance(2006L, 2L, "국민은행", 222L);
         housingFinanceRepository.save(housingFinanceOne);
         housingFinanceRepository.save(housingFinanceTwo);
         housingFinanceRepository.save(housingFinanceThree);

@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 @Repository
-public class JpaAvgBankDao implements AvgBankDao{
+public class JpaAvgBankDao implements AvgBankDao {
 
     private final EntityManager em;
 
@@ -23,7 +23,7 @@ public class JpaAvgBankDao implements AvgBankDao{
                         "hf.name, hf.year, AVG(hf.amount) AS average)" +
                         "FROM HousingFinance hf " +
                         "GROUP BY hf.name, hf.year " +
-                        "HAVING hf.name = '외환은행' AND hf.year >= 2005 AND hf.year <= 2016" +
+                        "HAVING hf.name = '외환은행' AND hf.year >= 2005 AND hf.year <= 2016 And COUNT(hf.year) = 12" +
                         "Order by average DESC";
 
         TypedQuery<ResDetailAvgAmountDto> query =
@@ -39,7 +39,7 @@ public class JpaAvgBankDao implements AvgBankDao{
                         "hf.name, hf.year, AVG(hf.amount) AS average)" +
                         "FROM HousingFinance hf " +
                         "GROUP BY hf.name, hf.year " +
-                        "HAVING hf.name = '외환은행' AND hf.year >= 2005 AND hf.year <= 2016" +
+                        "HAVING hf.name = '외환은행' AND hf.year >= 2005 AND hf.year <= 2016 And COUNT(hf.year) = 12" +
                         "Order by average";
 
         TypedQuery<ResDetailAvgAmountDto> query =
