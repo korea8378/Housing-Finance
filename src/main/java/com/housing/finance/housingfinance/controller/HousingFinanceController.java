@@ -1,5 +1,6 @@
 package com.housing.finance.housingfinance.controller;
 
+import com.housing.finance.housingfinance.dto.ResAvgOfBankDto;
 import com.housing.finance.housingfinance.dto.ResMaximumOfBankDto;
 import com.housing.finance.housingfinance.dto.ResTotalHousingFinanceDto;
 import com.housing.finance.housingfinance.service.HousingFinanceVO;
@@ -32,5 +33,10 @@ public class HousingFinanceController {
     @GetMapping(value = "/housing-finance/maximum")
     public ResponseEntity<ResMaximumOfBankDto> getMaximumOfAllBank() {
         return ResponseEntity.status(HttpStatus.OK).body(housingFinanceService.getMaximumOfAllBank());
+    }
+
+    @GetMapping(value = "/housing-finance/avg")
+    public ResponseEntity<ResAvgOfBankDto> getAvgOfBank() {
+        return ResponseEntity.status(HttpStatus.OK).body(housingFinanceService.getMaxMinAvgOfBank());
     }
 }
