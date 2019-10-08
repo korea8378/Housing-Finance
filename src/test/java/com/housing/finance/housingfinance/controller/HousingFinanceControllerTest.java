@@ -58,4 +58,12 @@ public class HousingFinanceControllerTest {
                 .andExpect(status().isOk());
     }
 
+
+    @Test
+    public void testGetAvgOfBank() throws Exception {
+        this.mockMvc.perform(get("/housing-finance/avg")
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 }

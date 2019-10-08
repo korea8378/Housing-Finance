@@ -3,7 +3,7 @@ package com.housing.finance.housingfinance.dao;
 import com.housing.finance.housingfinance.domain.HousingFinance;
 import com.housing.finance.housingfinance.domain.HousingFinanceRepository;
 import com.housing.finance.housingfinance.dto.ResMaximumOfBankDto;
-import com.housing.finance.housingfinance.dto.ResTotalAmountDto;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.persistence.EntityManager;
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,7 +19,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ActiveProfiles("test")
 public class JpaMaximumBankDaoTest {
-
 
     private JpaMaximumBankDao jpaMaximumBankDao;
 
@@ -30,8 +28,8 @@ public class JpaMaximumBankDaoTest {
     @Autowired
     private EntityManager entityManager;
 
-    @Test
-    public void testTotalAmountJpql() {
+    @Before
+    public void setUp() {
         jpaMaximumBankDao = new JpaMaximumBankDao(entityManager);
         HousingFinance housingFinanceOne = new HousingFinance(2011L, 1L, "신한은행", 1019L);
         HousingFinance housingFinanceTwo = new HousingFinance(2011L, 2L, "신한은행", 1022L);
@@ -61,6 +59,10 @@ public class JpaMaximumBankDaoTest {
         housingFinanceRepository.save(housingFinanceTwelve);
         housingFinanceRepository.save(housingFinanceThirteen);
         housingFinanceRepository.save(housingFinanceFourteen);
+    }
+
+    @Test
+    public void testSelectMaximumAmountGroupByYear() {
 
         ResMaximumOfBankDto resMaximumOfBankDto = jpaMaximumBankDao.selectMaximumAmountGroupByYear();
 
