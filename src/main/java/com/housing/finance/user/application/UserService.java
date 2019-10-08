@@ -1,6 +1,7 @@
 package com.housing.finance.user.application;
 
 import com.housing.finance.user.exception.ExistUserIdException;
+import com.housing.finance.user.exception.IsNotEqualToPasswordException;
 import com.housing.finance.user.exception.NotFoundUserException;
 import com.housing.finance.user.exception.NotRefreshTokenException;
 import com.housing.finance.user.domain.User;
@@ -21,8 +22,12 @@ public class UserService {
     }
 
     public ResUserDto signIn(ReqUserDto reqUserDto) {
-        User user = userRepository.findByUserIdAndPassword(reqUserDto.getUserId(), reqUserDto.getPassword())
+        User user = userRepository.findByUserId(reqUserDto.getUserId())
                 .orElseThrow(NotFoundUserException::new);
+
+        if(user.isNotEqualToPassword(reqUserDto.getPassword())) {
+            throw new IsNotEqualToPasswordException();
+        }
 
         String token = jwtManager.createJWT(user.getUserId());
 
@@ -37,7 +42,7 @@ public class UserService {
         User user = new User(reqUserDto.getUserId(), reqUserDto.getPassword());
 
         user = userRepository.save(user);
-
+        System.out.println(user.getPassword());
         String token = jwtManager.createJWT(user.getUserId());
 
         return new ResUserDto(token);

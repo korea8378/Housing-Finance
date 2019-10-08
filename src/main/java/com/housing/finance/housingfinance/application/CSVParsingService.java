@@ -2,7 +2,7 @@ package com.housing.finance.housingfinance.application;
 
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.housing.finance.housingfinance.domain.HousingFinanceRepository;
-import com.housing.finance.housingfinance.util.CSVParser;
+import com.housing.finance.util.CSVParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

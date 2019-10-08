@@ -1,4 +1,4 @@
-package com.housing.finance.housingfinance.util;
+package com.housing.finance.util;
 
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;

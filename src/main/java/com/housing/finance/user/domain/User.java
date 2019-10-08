@@ -25,4 +25,8 @@ public class User {
         this.userId = userId;
         this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
+
+    public boolean isNotEqualToPassword(String password) {
+        return !BCrypt.checkpw(password, this.password);
+    }
 }
