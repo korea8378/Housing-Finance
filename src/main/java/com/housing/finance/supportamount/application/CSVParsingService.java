@@ -1,8 +1,9 @@
 package com.housing.finance.supportamount.application;
 
+import com.fasterxml.jackson.dataformat.csv.CsvParser;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
 import com.housing.finance.supportamount.domain.supportamount.SupportAmountRepository;
-import com.housing.finance.util.CSVParser;
+import com.housing.finance.supportamount.util.CSVParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,18 +19,20 @@ public class CSVParsingService {
 
     private final SupportAmountRepository supportAmountRepository;
     private final SupportAmountMapper supportAmountMapper;
+    private final CSVParser csvParser;
 
     public CSVParsingService(SupportAmountRepository supportAmountRepository,
-                             SupportAmountMapper supportAmountMapper) {
+                             SupportAmountMapper supportAmountMapper, CSVParser csvParser) {
         this.supportAmountRepository = supportAmountRepository;
         this.supportAmountMapper = supportAmountMapper;
+        this.csvParser = csvParser;
     }
 
     @Transactional
     public void upload(Class<SupportAmountVO> supportAmountVOClass, MultipartFile file) {
         CsvSchema csvSchema = createBankSchema();
 
-        List<SupportAmountVO> supportAmountVOs = CSVParser.read(supportAmountVOClass, file, csvSchema);
+        List<SupportAmountVO> supportAmountVOs = csvParser.read(supportAmountVOClass, file, csvSchema);
 
         save(supportAmountVOs);
     }

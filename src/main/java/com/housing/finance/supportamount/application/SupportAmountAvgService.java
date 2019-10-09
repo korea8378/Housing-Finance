@@ -8,11 +8,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class SupportAmountAvgService {
 
-    private final SupportAmountMapper supportAmountMapper;
     private final AvgAmountDao avgAmountDao;
 
-    public SupportAmountAvgService(SupportAmountMapper supportAmountMapper, AvgAmountDao avgAmountDao) {
-        this.supportAmountMapper = supportAmountMapper;
+    public SupportAmountAvgService(AvgAmountDao avgAmountDao) {
         this.avgAmountDao = avgAmountDao;
     }
 
@@ -21,6 +19,7 @@ public class SupportAmountAvgService {
         ResDetailAvgAmountDto max = avgAmountDao.selectMaxGroupByYear();
         ResDetailAvgAmountDto min = avgAmountDao.selectMinGroupByYear();
 
-        return supportAmountMapper.toResMaxMinAvgAMountDto(max, min);
+        return new ResMaxMinAvgAMountDto(max, min);
     }
+
 }

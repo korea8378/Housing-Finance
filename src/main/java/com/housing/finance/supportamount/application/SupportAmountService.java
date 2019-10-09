@@ -1,9 +1,6 @@
 package com.housing.finance.supportamount.application;
 
-import com.housing.finance.supportamount.dto.ResBanksDto;
-import com.housing.finance.supportamount.dto.ResMaxMinAvgAMountDto;
-import com.housing.finance.supportamount.dto.ResMaxAmountDto;
-import com.housing.finance.supportamount.dto.ResTotalAmountsDto;
+import com.housing.finance.supportamount.dto.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,17 +11,20 @@ public class SupportAmountService {
     private final SupportAmountTotalService supportAmountTotalService;
     private final SupportAmountMaxService supportAmountMaxService;
     private final SupportAmountAvgService supportAmountAvgService;
+    private final SupportAmountPredictService supportAmountPredictService;
     private final BankService bankService;
 
     public SupportAmountService(CSVParsingService csvParsingService,
                                 SupportAmountTotalService supportAmountTotalService,
                                 SupportAmountMaxService supportAmountMaxService,
                                 SupportAmountAvgService supportAmountAvgService,
+                                SupportAmountPredictService supportAmountPredictService,
                                 BankService bankService) {
         this.csvParsingService = csvParsingService;
         this.supportAmountTotalService = supportAmountTotalService;
         this.supportAmountMaxService = supportAmountMaxService;
         this.supportAmountAvgService = supportAmountAvgService;
+        this.supportAmountPredictService = supportAmountPredictService;
         this.bankService = bankService;
     }
 
@@ -40,13 +40,15 @@ public class SupportAmountService {
         return supportAmountTotalService.getByYear();
     }
 
-    public ResMaxAmountDto getMaxOfBank() {
-        return supportAmountMaxService.getOfAllBank();
+    public ResMaxAmountDto getMaxOfBanks() {
+        return supportAmountMaxService.getOfBanks();
     }
 
     public ResMaxMinAvgAMountDto getMaxMinAvgOfKoreaExchangeBank() {
         return supportAmountAvgService.getMaxMinOfKoreaExchangeBank();
     }
 
-
+    public ResPredictionAmountDto getPredictionOfBank(ReqPredictionAmountDto reqPredictionAmountDto) {
+        return supportAmountPredictService.getByBankAndMonth(reqPredictionAmountDto);
+    }
 }

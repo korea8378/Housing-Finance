@@ -3,6 +3,7 @@ package com.housing.finance.supportamount.ui;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.housing.finance.supportamount.application.BankService;
 import com.housing.finance.supportamount.application.SupportAmountService;
+import com.housing.finance.user.dto.ReqUserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -70,12 +72,30 @@ public class SupportAmountControllerTest {
                 .andExpect(status().isOk());
     }
 
-
     @Test
     public void testGetAvgOfBank() throws Exception {
         this.mockMvc.perform(get("/banks/korea-exchange-bank/support-amount/avg")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testGetPredictionOfBank() throws Exception {
+        this.mockMvc.perform(get("/support-amount/prediction")
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .param("bank", "국민은행")
+                .param("month", "2"))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void testNullFieldReqPredictionAmountDto() throws Exception {
+
+        this.mockMvc.perform(get("/support-amount/prediction")
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
     }
 }

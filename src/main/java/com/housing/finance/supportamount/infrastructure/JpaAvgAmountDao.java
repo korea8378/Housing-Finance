@@ -21,10 +21,10 @@ public class JpaAvgAmountDao implements AvgAmountDao {
 
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResDetailAvgAmountDto(" +
-                        "sa.name, sa.year, AVG(sa.amount) AS average)" +
+                        "sa.bankName, sa.year, AVG(sa.amount) AS average)" +
                         "FROM SupportAmount sa " +
-                        "GROUP BY sa.name, sa.year " +
-                        "HAVING sa.name = '외환은행' AND sa.year >= 2005 AND sa.year <= 2016 And COUNT(sa.year) = 12" +
+                        "GROUP BY sa.bankName, sa.year " +
+                        "HAVING sa.bankName = '외환은행' AND sa.year >= 2005 AND sa.year <= 2016 And COUNT(sa.year) = 12" +
                         "Order by average DESC";
 
         TypedQuery<ResDetailAvgAmountDto> query =
@@ -37,10 +37,10 @@ public class JpaAvgAmountDao implements AvgAmountDao {
 
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResDetailAvgAmountDto(" +
-                        "sa.name, sa.year, AVG(sa.amount) AS average)" +
+                        "sa.bankName, sa.year, AVG(sa.amount) AS average)" +
                         "FROM SupportAmount sa " +
-                        "GROUP BY sa.name, sa.year " +
-                        "HAVING sa.name = '외환은행' AND sa.year >= 2005 AND sa.year <= 2016 And COUNT(sa.year) = 12" +
+                        "GROUP BY sa.bankName, sa.year " +
+                        "HAVING sa.bankName = '외환은행' AND sa.year >= 2005 AND sa.year <= 2016 And COUNT(sa.year) = 12" +
                         "Order by average";
 
         TypedQuery<ResDetailAvgAmountDto> query =

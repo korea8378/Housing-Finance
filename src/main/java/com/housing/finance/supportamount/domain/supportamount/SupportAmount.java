@@ -19,14 +19,14 @@ public class SupportAmount {
 
     private Long month;
 
-    private String name;
+    private String bankName;
 
     private Long amount;
 
-    public SupportAmount(Long year, Long month, String name, Long amount) {
+    public SupportAmount(Long year, Long month, String bankName, Long amount) {
         this.year = year;
         this.month = month;
-        this.name = name;
+        this.bankName = bankName;
         this.amount = amount;
     }
 }
