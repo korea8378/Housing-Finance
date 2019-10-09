@@ -1,6 +1,6 @@
 package com.housing.finance.supportamount.application;
 
-import com.housing.finance.supportamount.dao.AvgBankDao;
+import com.housing.finance.supportamount.dao.AvgAmountDao;
 import com.housing.finance.supportamount.dto.ResMaxMinAvgAMountDto;
 import com.housing.finance.supportamount.dto.ResDetailAvgAmountDto;
 import org.springframework.stereotype.Service;
@@ -9,17 +9,17 @@ import org.springframework.stereotype.Service;
 public class SupportAmountAvgService {
 
     private final SupportAmountMapper supportAmountMapper;
-    private final AvgBankDao avgBankDao;
+    private final AvgAmountDao avgAmountDao;
 
-    public SupportAmountAvgService(SupportAmountMapper supportAmountMapper, AvgBankDao avgBankDao) {
+    public SupportAmountAvgService(SupportAmountMapper supportAmountMapper, AvgAmountDao avgAmountDao) {
         this.supportAmountMapper = supportAmountMapper;
-        this.avgBankDao = avgBankDao;
+        this.avgAmountDao = avgAmountDao;
     }
 
     public ResMaxMinAvgAMountDto getMaxMinOfKoreaExchangeBank() {
 
-        ResDetailAvgAmountDto max = avgBankDao.selectMaxAvgAmountGroupByYear();
-        ResDetailAvgAmountDto min = avgBankDao.selectMinAvgAmountGroupByYear();
+        ResDetailAvgAmountDto max = avgAmountDao.selectMaxGroupByYear();
+        ResDetailAvgAmountDto min = avgAmountDao.selectMinGroupByYear();
 
         return supportAmountMapper.toResMaxMinAvgAMountDto(max, min);
     }

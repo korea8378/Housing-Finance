@@ -1,6 +1,6 @@
 package com.housing.finance.supportamount.infrastructure;
 
-import com.housing.finance.supportamount.dao.AvgBankDao;
+import com.housing.finance.supportamount.dao.AvgAmountDao;
 import com.housing.finance.supportamount.dto.ResDetailAvgAmountDto;
 import org.springframework.stereotype.Repository;
 
@@ -8,16 +8,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 @Repository
-public class JpaAvgBankDao implements AvgBankDao {
+public class JpaAvgAmountDao implements AvgAmountDao {
 
     private final EntityManager em;
 
-    public JpaAvgBankDao(EntityManager em) {
+    public JpaAvgAmountDao(EntityManager em) {
         this.em = em;
     }
 
     @Override
-    public ResDetailAvgAmountDto selectMaxAvgAmountGroupByYear() {
+    public ResDetailAvgAmountDto selectMaxGroupByYear() {
 
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResDetailAvgAmountDto(" +
@@ -33,7 +33,7 @@ public class JpaAvgBankDao implements AvgBankDao {
     }
 
     @Override
-    public ResDetailAvgAmountDto selectMinAvgAmountGroupByYear() {
+    public ResDetailAvgAmountDto selectMinGroupByYear() {
 
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResDetailAvgAmountDto(" +
@@ -47,4 +47,5 @@ public class JpaAvgBankDao implements AvgBankDao {
                 em.createQuery(selectQuery, ResDetailAvgAmountDto.class).setMaxResults(1);
         return query.getSingleResult();
     }
+
 }

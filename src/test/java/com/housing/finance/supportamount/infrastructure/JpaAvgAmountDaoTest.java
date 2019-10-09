@@ -18,9 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ActiveProfiles("test")
-public class JpaAvgBankDaoTest {
+public class JpaAvgAmountDaoTest {
 
-    private JpaAvgBankDao jpaAvgBankDao;
+    private JpaAvgAmountDao jpaAvgAmountDao;
     private Long tempAvg;
 
     @Autowired
@@ -31,7 +31,7 @@ public class JpaAvgBankDaoTest {
 
     @Before
     public void setUp() {
-        jpaAvgBankDao = new JpaAvgBankDao(entityManager);
+        jpaAvgAmountDao = new JpaAvgAmountDao(entityManager);
         SupportAmount supportAmountOne = new SupportAmount(2011L, 1L, "외환은행", 1019L);
         SupportAmount supportAmountTwo = new SupportAmount(2011L, 2L, "외환은행", 1022L);
         SupportAmount supportAmountThree = new SupportAmount(2011L, 3L, "외환은행", 1234L);
@@ -67,7 +67,7 @@ public class JpaAvgBankDaoTest {
 
     @Test
     public void testSelectMaxAvgAmountGroupByYear() {
-        ResDetailAvgAmountDto resDetailAvgAmountDto = jpaAvgBankDao.selectMaxAvgAmountGroupByYear();
+        ResDetailAvgAmountDto resDetailAvgAmountDto = jpaAvgAmountDao.selectMaxGroupByYear();
 
         assertThat(resDetailAvgAmountDto.getYear()).isEqualTo(2011L);
         assertThat(resDetailAvgAmountDto.getBank()).isEqualTo("외환은행");

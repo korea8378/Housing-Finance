@@ -1,6 +1,6 @@
 package com.housing.finance.supportamount.infrastructure;
 
-import com.housing.finance.supportamount.dao.MaxBankDao;
+import com.housing.finance.supportamount.dao.MaxAmountDao;
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
 import org.springframework.stereotype.Repository;
 
@@ -8,16 +8,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
 @Repository
-public class JpaMaxBankDao implements MaxBankDao {
+public class JpaMaxAmountDao implements MaxAmountDao {
 
     private final EntityManager em;
 
-    public JpaMaxBankDao(EntityManager em) {
+    public JpaMaxAmountDao(EntityManager em) {
         this.em = em;
     }
 
     @Override
-    public ResMaxAmountDto selectMaxAmountGroupByYear() {
+    public ResMaxAmountDto selectGroupByYear() {
 
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResMaxAmountDto(" +
