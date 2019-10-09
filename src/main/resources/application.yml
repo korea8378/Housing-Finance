@@ -1,3 +1,7 @@
+Secret.Key: ${JWT_Secret_Key}
+
+
+---
 spring:
   profiles: local
   datasource:
@@ -37,3 +41,7 @@ spring:
       ddl-auto: validate
 
 ---
+
+spring:
+  profiles: test
+Secret.Key: test용 키입니다.
