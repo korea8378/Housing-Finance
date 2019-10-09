@@ -7,6 +7,7 @@ public class ApacheMathTest {
 
     @Test
     public void testSimpleRegression() {
+
         SimpleRegression simpleRegression = new SimpleRegression(true);
 
         simpleRegression.addData(2005, 864);
