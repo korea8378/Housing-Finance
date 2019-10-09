@@ -25,7 +25,7 @@ public class AuthenticationAspect {
     public void bankController() {
     }
 
-    @Pointcut("execution(public * com.housing.finance.housingfinance.ui.HousingFinanceController.*(..))")
+    @Pointcut("execution(public * com.housing.finance.supportamount.ui.SupportAmountController.*(..))")
     public void housingFinanceController() {
     }
 
