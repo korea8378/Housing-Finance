@@ -13,7 +13,7 @@ public class SupportAmountMaxService {
         this.maxAmountDao = maxAmountDao;
     }
 
-    public ResMaxAmountDto getOfAllBank() {
+    public ResMaxAmountDto getOfBanks() {
         return maxAmountDao.selectGroupByYear();
     }
 }

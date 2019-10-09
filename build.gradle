@@ -26,6 +26,8 @@ dependencies {
     implementation'org.mindrot:jbcrypt:0.4'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-csv'
     implementation'io.jsonwebtoken:jjwt-api:0.10.7'
+    compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.10.7'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.10.7'
     compileOnly 'org.projectlombok:lombok'

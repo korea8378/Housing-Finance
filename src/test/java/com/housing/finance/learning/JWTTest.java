@@ -1,4 +1,4 @@
-package com.housing.finance.util;
+package com.housing.finance.learning;
 
 
 import io.jsonwebtoken.Jwts;

@@ -1,11 +1,7 @@
 package com.housing.finance.supportamount.application;
 
-import com.housing.finance.supportamount.dto.ResDetailTotalAmountDto;
-import com.housing.finance.supportamount.dto.ResTotalAmountsDto;
 import com.housing.finance.supportamount.exception.UnsupportedFormCSVException;
 import com.housing.finance.supportamount.domain.supportamount.SupportAmount;
-import com.housing.finance.supportamount.dto.ResMaxMinAvgAMountDto;
-import com.housing.finance.supportamount.dto.ResDetailAvgAmountDto;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,7 +12,6 @@ public class SupportAmountMapper {
 
     private static final String COMMA = ",";
     private static final String EMPTY = "";
-
 
     public List<SupportAmount> toSupportAmounts(SupportAmountVO housingFinanceVO) {
         List<SupportAmount> housingFinances = new ArrayList<>();
@@ -69,14 +64,4 @@ public class SupportAmountMapper {
         return result;
     }
 
-    public ResTotalAmountsDto toResTotalAmountsDto(List<ResDetailTotalAmountDto> resDetailTotalAmountDtos) {
-        return ResTotalAmountsDto.builder()
-                .name("주택금융 공급현황")
-                .amountList(resDetailTotalAmountDtos)
-                .build();
-    }
-
-    public ResMaxMinAvgAMountDto toResMaxMinAvgAMountDto(ResDetailAvgAmountDto max, ResDetailAvgAmountDto min) {
-        return new ResMaxMinAvgAMountDto(max, min);
-    }
 }

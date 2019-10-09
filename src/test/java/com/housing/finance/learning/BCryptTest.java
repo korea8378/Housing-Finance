@@ -1,4 +1,4 @@
-package com.housing.finance.util;
+package com.housing.finance.learning;
 
 import org.junit.Test;
 import org.mindrot.jbcrypt.BCrypt;

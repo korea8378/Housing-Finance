@@ -21,9 +21,9 @@ public class JpaMaxAmountDao implements MaxAmountDao {
 
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResMaxAmountDto(" +
-                        "sa.year, sa.name, SUM(sa.amount) AS total)" +
+                        "sa.year, sa.bankName, SUM(sa.amount) AS total)" +
                         "FROM SupportAmount sa " +
-                        "GROUP BY sa.name, sa.year HAVING COUNT(sa.year) = 12 " +
+                        "GROUP BY sa.bankName, sa.year HAVING COUNT(sa.year) = 12 " +
                         "Order by total DESC";
 
         TypedQuery<ResMaxAmountDto> query =

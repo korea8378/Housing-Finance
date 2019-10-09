@@ -1,15 +1,16 @@
 package com.housing.finance.supportamount.ui;
 
-import com.housing.finance.supportamount.dto.ResBanksDto;
-import com.housing.finance.supportamount.dto.ResMaxMinAvgAMountDto;
-import com.housing.finance.supportamount.dto.ResMaxAmountDto;
+import com.housing.finance.exception.RequestNullFieldException;
+import com.housing.finance.supportamount.dto.*;
 import com.housing.finance.supportamount.application.SupportAmountVO;
 import com.housing.finance.supportamount.application.SupportAmountService;
-import com.housing.finance.supportamount.dto.ResTotalAmountsDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.Valid;
 
 @RestController
 public class SupportAmountController {
@@ -37,12 +38,24 @@ public class SupportAmountController {
     }
 
     @GetMapping(value = "/support-amount/max")
-    public ResponseEntity<ResMaxAmountDto> getMaxOfAllBank() {
-        return ResponseEntity.status(HttpStatus.OK).body(supportAmountService.getMaxOfBank());
+    public ResponseEntity<ResMaxAmountDto> getMaxOfBanks() {
+        return ResponseEntity.status(HttpStatus.OK).body(supportAmountService.getMaxOfBanks());
     }
 
     @GetMapping(value = "/banks/korea-exchange-bank/support-amount/avg")
     public ResponseEntity<ResMaxMinAvgAMountDto> getAvgOfKoreaExchangeBank() {
         return ResponseEntity.status(HttpStatus.OK).body(supportAmountService.getMaxMinAvgOfKoreaExchangeBank());
+    }
+
+    @GetMapping(value = "/support-amount/prediction")
+    public ResponseEntity<ResPredictionAmountDto> getPredictionOfBank(
+            @ModelAttribute @Valid ReqPredictionAmountDto reqPredictionAmountDto, BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors()) {
+            throw new RequestNullFieldException();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                supportAmountService.getPredictionOfBank(reqPredictionAmountDto));
     }
 }

@@ -1,6 +1,7 @@
 package com.housing.finance.supportamount.application;
 
 import com.housing.finance.supportamount.domain.supportamount.SupportAmountRepository;
+import com.housing.finance.supportamount.util.CSVParser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;
@@ -8,16 +9,18 @@ import org.springframework.mock.web.MockMultipartFile;
 import static org.mockito.Mockito.mock;
 
 public class CSVParsingServiceTest {
-    private SupportAmountRepository housingFinanceRepository;
-    private SupportAmountMapper housingFinanceMapper;
+    private SupportAmountRepository supportAmountRepository;
+    private SupportAmountMapper supportAmountMapper;
     private CSVParsingService csvParsingService;
+    private CSVParser csvParser;
 
     @Before
     public void mockUp() {
-        housingFinanceRepository = mock(SupportAmountRepository.class);
-        housingFinanceMapper = mock(SupportAmountMapper.class);
+        supportAmountRepository = mock(SupportAmountRepository.class);
+        supportAmountMapper = mock(SupportAmountMapper.class);
+        csvParser = mock(CSVParser.class);
 
-        csvParsingService = new CSVParsingService(housingFinanceRepository, housingFinanceMapper);
+        csvParsingService = new CSVParsingService(supportAmountRepository, supportAmountMapper, csvParser);
     }
 
     @Test
