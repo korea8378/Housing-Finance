@@ -21,15 +21,11 @@ public class AuthenticationAspect {
         this.jwtManager = jwtManager;
     }
 
-    @Pointcut("execution(public * com.housing.finance.bank.ui.BankController.*(..))")
-    public void bankController() {
-    }
-
     @Pointcut("execution(public * com.housing.finance.supportamount.ui.SupportAmountController.*(..))")
     public void housingFinanceController() {
     }
 
-    @Before(value = "bankController() || housingFinanceController()")
+    @Before(value = "housingFinanceController()")
     public void checkJWT() {
         HttpServletRequest request =
                 ((ServletRequestAttributes) RequestContextHolder

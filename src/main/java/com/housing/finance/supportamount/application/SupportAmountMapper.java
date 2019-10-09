@@ -3,7 +3,7 @@ package com.housing.finance.supportamount.application;
 import com.housing.finance.supportamount.dto.ResDetailTotalAmountDto;
 import com.housing.finance.supportamount.dto.ResTotalAmountsDto;
 import com.housing.finance.supportamount.exception.UnsupportedFormCSVException;
-import com.housing.finance.supportamount.domain.SupportAmount;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmount;
 import com.housing.finance.supportamount.dto.ResMaxMinAvgAMountDto;
 import com.housing.finance.supportamount.dto.ResDetailAvgAmountDto;
 import org.springframework.stereotype.Component;

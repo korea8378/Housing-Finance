@@ -1,7 +1,8 @@
-package com.housing.finance.bank.application;
+package com.housing.finance.supportamount.application;
 
-import com.housing.finance.bank.domain.Bank;
-import com.housing.finance.bank.dto.ResBanksDto;
+import com.housing.finance.supportamount.domain.bank.Bank;
+import com.housing.finance.supportamount.dto.ResBanksDto;
+import com.housing.finance.supportamount.application.BankMapper;
 import org.junit.Test;
 
 import java.util.ArrayList;

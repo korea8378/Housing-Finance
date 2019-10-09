@@ -1,6 +1,6 @@
 package com.housing.finance.supportamount.application;
 
-import com.housing.finance.supportamount.domain.SupportAmount;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmount;
 import org.junit.Test;
 
 import java.util.List;

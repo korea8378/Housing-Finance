@@ -2,7 +2,7 @@ package com.housing.finance.supportamount.dao;
 
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
 
-public interface MaxBankDao {
+public interface MaxAmountDao {
 
-    ResMaxAmountDto selectMaxAmountGroupByYear();
+    ResMaxAmountDto selectGroupByYear();
 }

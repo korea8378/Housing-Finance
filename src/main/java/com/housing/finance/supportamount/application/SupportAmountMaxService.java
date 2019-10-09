@@ -1,19 +1,19 @@
 package com.housing.finance.supportamount.application;
 
-import com.housing.finance.supportamount.dao.MaxBankDao;
+import com.housing.finance.supportamount.dao.MaxAmountDao;
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SupportAmountMaxService {
 
-    private final MaxBankDao maxBankDao;
+    private final MaxAmountDao maxAmountDao;
 
-    public SupportAmountMaxService(MaxBankDao maxBankDao) {
-        this.maxBankDao = maxBankDao;
+    public SupportAmountMaxService(MaxAmountDao maxAmountDao) {
+        this.maxAmountDao = maxAmountDao;
     }
 
     public ResMaxAmountDto getOfAllBank() {
-        return maxBankDao.selectMaxAmountGroupByYear();
+        return maxAmountDao.selectGroupByYear();
     }
 }

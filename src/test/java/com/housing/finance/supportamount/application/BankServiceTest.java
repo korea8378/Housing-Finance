@@ -1,7 +1,9 @@
-package com.housing.finance.bank.application;
+package com.housing.finance.supportamount.application;
 
-import com.housing.finance.bank.domain.BankRepository;
-import com.housing.finance.bank.dto.ResBanksDto;
+import com.housing.finance.supportamount.domain.bank.BankRepository;
+import com.housing.finance.supportamount.dto.ResBanksDto;
+import com.housing.finance.supportamount.application.BankMapper;
+import com.housing.finance.supportamount.application.BankService;
 import org.junit.Before;
 import org.junit.Test;
 

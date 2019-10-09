@@ -1,7 +1,7 @@
 package com.housing.finance.supportamount.infrastructure;
 
-import com.housing.finance.supportamount.domain.SupportAmount;
-import com.housing.finance.supportamount.domain.SupportAmountRepository;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmount;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmountRepository;
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,9 +18,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 @ActiveProfiles("test")
-public class JpaMaxBankDaoTest {
+public class JpaMaxAmountDaoTest {
 
-    private JpaMaxBankDao jpaMaxBankDao;
+    private JpaMaxAmountDao jpaMaxAmountDao;
 
     @Autowired
     private SupportAmountRepository supportAmountRepository;
@@ -30,7 +30,7 @@ public class JpaMaxBankDaoTest {
 
     @Before
     public void setUp() {
-        jpaMaxBankDao = new JpaMaxBankDao(entityManager);
+        jpaMaxAmountDao = new JpaMaxAmountDao(entityManager);
         SupportAmount supportAmountOne = new SupportAmount(2011L, 1L, "신한은행", 1019L);
         SupportAmount supportAmountTwo = new SupportAmount(2011L, 2L, "신한은행", 1022L);
         SupportAmount supportAmountThree = new SupportAmount(2011L, 3L, "신한은행", 1234L);
@@ -64,7 +64,7 @@ public class JpaMaxBankDaoTest {
     @Test
     public void testSelectMaxAmountGroupByYear() {
 
-        ResMaxAmountDto resMaxAmountDto = jpaMaxBankDao.selectMaxAmountGroupByYear();
+        ResMaxAmountDto resMaxAmountDto = jpaMaxAmountDao.selectGroupByYear();
 
         assertThat(resMaxAmountDto.getYear()).isEqualTo(2011L);
         assertThat(resMaxAmountDto.getBank()).isEqualTo("신한은행");
