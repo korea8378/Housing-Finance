@@ -36,7 +36,7 @@ public class SupportAmountService {
         return supportAmountMaxService.getOfAllBank();
     }
 
-    public ResMaxMinAvgAMountDto getMaxMinAvgOfBank() {
-        return supportAmountAvgService.getMaxMin();
+    public ResMaxMinAvgAMountDto getMaxMinAvgOfKoreaExchangeBank() {
+        return supportAmountAvgService.getMaxMinOfKoreaExchangeBank();
     }
 }

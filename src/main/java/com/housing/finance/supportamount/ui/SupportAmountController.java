@@ -35,8 +35,8 @@ public class SupportAmountController {
         return ResponseEntity.status(HttpStatus.OK).body(supportAmountService.getMaxOfBank());
     }
 
-    @GetMapping(value = "/support-amount/avg")
-    public ResponseEntity<ResMaxMinAvgAMountDto> getAvgOfBank() {
-        return ResponseEntity.status(HttpStatus.OK).body(supportAmountService.getMaxMinAvgOfBank());
+    @GetMapping(value = "/banks/korea-exchange-bank/support-amount/avg")
+    public ResponseEntity<ResMaxMinAvgAMountDto> getAvgOfKoreaExchangeBank() {
+        return ResponseEntity.status(HttpStatus.OK).body(supportAmountService.getMaxMinAvgOfKoreaExchangeBank());
     }
 }

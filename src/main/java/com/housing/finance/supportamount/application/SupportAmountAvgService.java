@@ -16,7 +16,7 @@ public class SupportAmountAvgService {
         this.avgBankDao = avgBankDao;
     }
 
-    public ResMaxMinAvgAMountDto getMaxMin() {
+    public ResMaxMinAvgAMountDto getMaxMinOfKoreaExchangeBank() {
 
         ResDetailAvgAmountDto max = avgBankDao.selectMaxAvgAmountGroupByYear();
         ResDetailAvgAmountDto min = avgBankDao.selectMinAvgAmountGroupByYear();

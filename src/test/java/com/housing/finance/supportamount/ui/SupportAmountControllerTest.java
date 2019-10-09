@@ -61,7 +61,7 @@ public class SupportAmountControllerTest {
 
     @Test
     public void testGetAvgOfBank() throws Exception {
-        this.mockMvc.perform(get("/support-amount/avg")
+        this.mockMvc.perform(get("/banks/korea-exchange-bank/support-amount/avg")
                 .contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andDo(print())
                 .andExpect(status().isOk());
