@@ -2,9 +2,11 @@ package com.housing.finance.supportamount.infrastructure;
 
 import com.housing.finance.supportamount.dao.MaxAmountDao;
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
+import com.housing.finance.supportamount.infrastructure.exception.NotFoundAmountException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 @Repository
@@ -18,6 +20,7 @@ public class JpaMaxAmountDao implements MaxAmountDao {
 
     @Override
     public ResMaxAmountDto selectGroupByYear() {
+        ResMaxAmountDto resMaxAmountDto;
 
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResMaxAmountDto(" +
@@ -28,6 +31,12 @@ public class JpaMaxAmountDao implements MaxAmountDao {
 
         TypedQuery<ResMaxAmountDto> query =
                 em.createQuery(selectQuery, ResMaxAmountDto.class).setMaxResults(1);
-        return query.getSingleResult();
+        try {
+            resMaxAmountDto = query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new NotFoundAmountException();
+        }
+
+        return resMaxAmountDto;
     }
 }
