@@ -1,6 +1,7 @@
 package com.housing.finance.supportamount.ui;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.housing.finance.supportamount.application.BankService;
 import com.housing.finance.supportamount.application.SupportAmountService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +30,17 @@ public class SupportAmountControllerTest {
 
     @MockBean
     SupportAmountService supportAmountService;
+
+    @MockBean
+    private BankService bankService;
+
+    @Test
+    public void testGetBanks() throws Exception {
+        this.mockMvc.perform(get("/banks")
+                .contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andDo(print())
+                .andExpect(status().isOk());
+    }
 
     @Test
     public void testUploadSupportAmountCSV() throws Exception {

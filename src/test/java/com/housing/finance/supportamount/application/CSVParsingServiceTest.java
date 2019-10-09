@@ -1,6 +1,6 @@
 package com.housing.finance.supportamount.application;
 
-import com.housing.finance.supportamount.domain.SupportAmountRepository;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmountRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mock.web.MockMultipartFile;

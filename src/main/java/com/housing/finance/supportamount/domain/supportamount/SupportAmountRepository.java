@@ -1,4 +1,4 @@
-package com.housing.finance.supportamount.domain;
+package com.housing.finance.supportamount.domain.supportamount;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

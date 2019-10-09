@@ -1,7 +1,8 @@
-package com.housing.finance.bank.application;
+package com.housing.finance.supportamount.application;
 
-import com.housing.finance.bank.domain.Bank;
-import com.housing.finance.bank.dto.*;
+import com.housing.finance.supportamount.domain.bank.Bank;
+import com.housing.finance.supportamount.dto.ResBankDto;
+import com.housing.finance.supportamount.dto.ResBanksDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

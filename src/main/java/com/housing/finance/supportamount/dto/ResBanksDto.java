@@ -1,4 +1,4 @@
-package com.housing.finance.bank.dto;
+package com.housing.finance.supportamount.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

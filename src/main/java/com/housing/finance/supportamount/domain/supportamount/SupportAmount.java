@@ -1,4 +1,4 @@
-package com.housing.finance.supportamount.domain;
+package com.housing.finance.supportamount.domain.supportamount;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,7 @@
 package com.housing.finance.supportamount.infrastructure;
 
-import com.housing.finance.supportamount.domain.SupportAmount;
-import com.housing.finance.supportamount.domain.SupportAmountRepository;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmount;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmountRepository;
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
 import org.junit.Before;
 import org.junit.Test;

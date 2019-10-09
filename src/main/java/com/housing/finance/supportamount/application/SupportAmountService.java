@@ -1,5 +1,6 @@
 package com.housing.finance.supportamount.application;
 
+import com.housing.finance.supportamount.dto.ResBanksDto;
 import com.housing.finance.supportamount.dto.ResMaxMinAvgAMountDto;
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
 import com.housing.finance.supportamount.dto.ResTotalAmountsDto;
@@ -13,15 +14,22 @@ public class SupportAmountService {
     private final SupportAmountTotalService supportAmountTotalService;
     private final SupportAmountMaxService supportAmountMaxService;
     private final SupportAmountAvgService supportAmountAvgService;
+    private final BankService bankService;
 
     public SupportAmountService(CSVParsingService csvParsingService,
                                 SupportAmountTotalService supportAmountTotalService,
                                 SupportAmountMaxService supportAmountMaxService,
-                                SupportAmountAvgService supportAmountAvgService) {
+                                SupportAmountAvgService supportAmountAvgService,
+                                BankService bankService) {
         this.csvParsingService = csvParsingService;
         this.supportAmountTotalService = supportAmountTotalService;
         this.supportAmountMaxService = supportAmountMaxService;
         this.supportAmountAvgService = supportAmountAvgService;
+        this.bankService = bankService;
+    }
+
+    public ResBanksDto getBanks() {
+        return bankService.getBanks();
     }
 
     public void upload(Class<SupportAmountVO> supportAmountVOClass, MultipartFile file) {
@@ -39,4 +47,6 @@ public class SupportAmountService {
     public ResMaxMinAvgAMountDto getMaxMinAvgOfKoreaExchangeBank() {
         return supportAmountAvgService.getMaxMinOfKoreaExchangeBank();
     }
+
+
 }

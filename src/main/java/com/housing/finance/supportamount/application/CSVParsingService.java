@@ -1,7 +1,7 @@
 package com.housing.finance.supportamount.application;
 
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import com.housing.finance.supportamount.domain.SupportAmountRepository;
+import com.housing.finance.supportamount.domain.supportamount.SupportAmountRepository;
 import com.housing.finance.util.CSVParser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

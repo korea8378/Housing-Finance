@@ -1,5 +1,6 @@
 package com.housing.finance.supportamount.ui;
 
+import com.housing.finance.supportamount.dto.ResBanksDto;
 import com.housing.finance.supportamount.dto.ResMaxMinAvgAMountDto;
 import com.housing.finance.supportamount.dto.ResMaxAmountDto;
 import com.housing.finance.supportamount.application.SupportAmountVO;
@@ -17,6 +18,11 @@ public class SupportAmountController {
 
     public SupportAmountController(SupportAmountService supportAmountService) {
         this.supportAmountService = supportAmountService;
+    }
+
+    @GetMapping("/banks")
+    public ResponseEntity<ResBanksDto> getBanks() {
+        return ResponseEntity.status(HttpStatus.OK).body(supportAmountService.getBanks());
     }
 
     @PostMapping(value = "/support-amount")
