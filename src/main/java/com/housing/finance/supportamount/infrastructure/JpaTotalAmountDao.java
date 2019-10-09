@@ -35,6 +35,7 @@ public class JpaTotalAmountDao implements TotalAmountDao {
                         "FROM SupportAmount sa GROUP BY sa.year order by sa.year";
         TypedQuery<ResDetailTotalAmountDto> query =
                 em.createQuery(selectQuery, ResDetailTotalAmountDto.class);
+
         return query.getResultList();
     }
 }
