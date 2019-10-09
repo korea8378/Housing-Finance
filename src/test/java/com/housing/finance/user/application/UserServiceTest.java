@@ -51,7 +51,7 @@ public class UserServiceTest {
 
     @Test
     public void testSignInNoFoundUserByID() {
-        when(userRepository.findByUserIdAndPassword(any(), any())).thenReturn(Optional.empty());
+        when(userRepository.findByUserId(any())).thenReturn(Optional.empty());
 
         expectedException.expect(NotFoundUserException.class);
 
@@ -62,7 +62,8 @@ public class UserServiceTest {
 
     @Test
     public void testSignInIsNotEqualToPassword() {
-        when(userRepository.findByUserIdAndPassword(any(), any())).thenReturn(Optional.of(new User()));
+        User user = new User("hello", "123321");
+        when(userRepository.findByUserId(any())).thenReturn(Optional.of(user));
 
         expectedException.expect(IsNotEqualToPasswordException.class);
 
