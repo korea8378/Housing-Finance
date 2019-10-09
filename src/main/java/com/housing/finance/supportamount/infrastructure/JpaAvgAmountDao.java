@@ -2,9 +2,11 @@ package com.housing.finance.supportamount.infrastructure;
 
 import com.housing.finance.supportamount.dao.AvgAmountDao;
 import com.housing.finance.supportamount.dto.ResDetailAvgAmountDto;
+import com.housing.finance.supportamount.infrastructure.exception.NotFoundAmountException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 
 @Repository
@@ -18,7 +20,6 @@ public class JpaAvgAmountDao implements AvgAmountDao {
 
     @Override
     public ResDetailAvgAmountDto selectMaxGroupByYear() {
-
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResDetailAvgAmountDto(" +
                         "sa.bankName, sa.year, AVG(sa.amount) AS average)" +
@@ -29,12 +30,12 @@ public class JpaAvgAmountDao implements AvgAmountDao {
 
         TypedQuery<ResDetailAvgAmountDto> query =
                 em.createQuery(selectQuery, ResDetailAvgAmountDto.class).setMaxResults(1);
-        return query.getSingleResult();
+
+        return executeQuery(query);
     }
 
     @Override
     public ResDetailAvgAmountDto selectMinGroupByYear() {
-
         String selectQuery =
                 "SELECT new com.housing.finance.supportamount.dto.ResDetailAvgAmountDto(" +
                         "sa.bankName, sa.year, AVG(sa.amount) AS average)" +
@@ -45,7 +46,19 @@ public class JpaAvgAmountDao implements AvgAmountDao {
 
         TypedQuery<ResDetailAvgAmountDto> query =
                 em.createQuery(selectQuery, ResDetailAvgAmountDto.class).setMaxResults(1);
-        return query.getSingleResult();
+
+        return executeQuery(query);
+
+    }
+
+    private ResDetailAvgAmountDto executeQuery(TypedQuery<ResDetailAvgAmountDto> query) {
+        ResDetailAvgAmountDto resDetailAvgAmountDto;
+        try {
+            resDetailAvgAmountDto = query.getSingleResult();
+        } catch (NoResultException e) {
+            throw new NotFoundAmountException();
+        }
+        return resDetailAvgAmountDto;
     }
 
 }
