@@ -12,7 +12,7 @@
 
 ## 빌드
 - git clone
-<pre><code>https://github.com/korea8378/Housing-Finance.git</code></pre>
+<pre><code>git clone https://github.com/korea8378/Housing-Finance.git</code></pre>
 - 빌드(해당 프로젝트 루트 위치에서)
 <pre><code>cd Housing-Finance
 
@@ -25,7 +25,7 @@
 - 실행(운영) - MySQL
 <pre><code>nohup java -jar -Dspring.profiles.active=prod -DJWT_Secret_Key={secret key} -DMYSQL_URL={msyql url} -DUSER_NAME={user name} -DUSER_PASSWORD={user password} ./build/libs/finance-0.0.1-SNAPSHOT.jar &</code></pre>
 - spring.profiles.active
-  - 실행 환경 - 개발(prod) or 운영(local)
+  - 실행 환경 - 운영(prod) or 개발(local)
 - JWT_Secret_Key
   - JWT 인코딩에 사용될 비밀 키/{secret key}에 입력
 - MYSQL_URL
